@@ -1,21 +1,22 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name     : root
+  name: root
   namespace: argocd
   finalizers:
-  - resources-finalizer.argocd.argoproj.io
+  - finalizers.argocd.argoproj.io/resource-cleanup
 spec:
   destination:
-    name     : in-cluster
+    server: 'https://kubernetes.default.svc'
     namespace: argocd
   source:
-    path   : "demo-dev/applications"
-    repoURL: "git@github.com:adv4000/argocd.git"
+    path: "demo-dev/applications"
+    repoURL: "git@github.com:miklashevich/argocd.git"
     targetRevision: HEAD
   project: default
   syncPolicy:
     automated:
-      prune   : true
+      prune: true
       selfHeal: true
+     
       
