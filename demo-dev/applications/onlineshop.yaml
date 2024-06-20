@@ -1,22 +1,24 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: root
+  name     : shop
   namespace: argocd
   finalizers:
-  - finalizers.argocd.argoproj.io/resource-cleanup
+  - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    server: 'https://kubernetes.default.svc'
-    namespace: argocd
+    name     : in-cluster
+    namespace: shop
   source:
-    path: "release/app"
+    path   : "shop/kubernetes-manifests.yaml"
     repoURL: "git@github.com:miklashevich/argocd.git"
     targetRevision: HEAD
+
+
   project: default
   syncPolicy:
     automated:
-      prune: true
+      prune   : true
       selfHeal: true
-     
-      
+    syncOptions:
+      - CreateNamespace=true         
