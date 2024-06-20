@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name     : shop
+  name     : onlineshop
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
@@ -10,7 +10,7 @@ spec:
     name     : in-cluster
     namespace: shop
   source:
-    path   : "shop/kubernetes-manifests.yaml"
+    path   : "shop"
     repoURL: "git@github.com:miklashevich/argocd.git"
     targetRevision: HEAD
 
@@ -22,3 +22,4 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true         
+
