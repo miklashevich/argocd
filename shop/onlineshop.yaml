@@ -1,25 +1,21 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name     : onlineshop
+  name: onlineshop
   namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    name     : in-cluster
+    name: in-cluster
     namespace: shop
   source:
-    path   : "shop"
+    path: "shop"
     repoURL: "git@github.com:miklashevich/argocd.git"
     targetRevision: HEAD
-
-
   project: default
   syncPolicy:
     automated:
-      prune   : true
+      prune: true
       selfHeal: true
     syncOptions:
-      - CreateNamespace=true         
+      - CreateNamespace=true
 
